@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Product } from '../product';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
 import { SortPipe } from '../sort.pipe';
@@ -15,11 +15,12 @@ export class ProductListComponent implements OnInit {
 
   selectedProduct: Product | undefined;
 
-  private productService: ProductsService;
+  // private productService: ProductsService;
+  private productService = inject(ProductsService);
 
-  constructor() {
-    this.productService = new ProductsService();
-  }
+  // constructor() {
+    // this.productService = new ProductsService();
+  // }
 
   onAdded(product: Product) {
     alert(`${product.title} added to the cart!`);
