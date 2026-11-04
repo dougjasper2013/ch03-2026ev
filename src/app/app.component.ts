@@ -4,6 +4,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { CopyrightDirective } from './copyright.directive';
 import { NumericDirective } from './numeric.directive';
 import { APP_SETTINGS, appSettings } from './app.settings';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,8 @@ export class AppComponent {
   settings = inject(APP_SETTINGS);
 
   private setTitle = () => {
-    this.title = this.settings.title;
+    const timestamp = new Date();
+    this.title = `${this.settings.title} (${timestamp})`;
   }
 
   private changeTitle(callback: Function) {
@@ -31,15 +33,22 @@ export class AppComponent {
 
   constructor() {
     // this.changeTitle(this.setTitle);
-    this.onComplete().then(this.setTitle);
+    // this.onComplete().then(this.setTitle);
+    this.title$.subscribe(this.setTitle);
   }
 
   private onComplete() {
     return new Promise<void>(resolve => {
-      setTimeout(() => {
+      setInterval(() => {
         resolve();
       }, 2000);
     });
   }
+
+  title$ = new Observable(observer => {
+    setInterval(() => {
+      observer.next(this.setTitle)
+    }, 2000);
+  });
 
 }
