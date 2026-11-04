@@ -5,10 +5,11 @@ import { CopyrightDirective } from './copyright.directive';
 import { NumericDirective } from './numeric.directive';
 import { APP_SETTINGS, appSettings } from './app.settings';
 import { Observable } from 'rxjs';
+import { KeyLoggerComponent } from './key-logger/key-logger.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ProductListComponent, CopyrightDirective, NumericDirective],
+  imports: [RouterOutlet, ProductListComponent, CopyrightDirective, NumericDirective, KeyLoggerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   providers: [
