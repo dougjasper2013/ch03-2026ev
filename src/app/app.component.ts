@@ -18,4 +18,28 @@ export class AppComponent {
   title = 'ch03-2026ev';
 
   settings = inject(APP_SETTINGS);
+
+  private setTitle = () => {
+    this.title = this.settings.title;
+  }
+
+  private changeTitle(callback: Function) {
+    setTimeout(() => {
+      callback();
+    }, 2000);
+  }
+
+  constructor() {
+    // this.changeTitle(this.setTitle);
+    this.onComplete().then(this.setTitle);
+  }
+
+  private onComplete() {
+    return new Promise<void>(resolve => {
+      setTimeout(() => {
+        resolve();
+      }, 2000);
+    });
+  }
+
 }
